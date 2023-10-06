@@ -1,0 +1,195 @@
+*{
+    border: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.container{
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 5vw 40vw 10vw;
+    grid-template-areas: "h"
+                         "m"
+                         "f";
+}
+
+header{
+    background-color: black;
+    position: fixed;
+    width: 100%;
+    height: 5vw;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    color: white;
+    box-shadow: 0px 0px 50px black;
+    border-bottom: solid 0.15vw #666666;
+}
+.logo img{
+    width: 6vw;
+    margin-left: 0vw;
+}
+
+
+main{
+    grid-area: m;
+    background-color: gray;
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+    grid-template-rows: 1fr;
+    grid-template-areas: "wither main1 dt";
+    gap: vw;
+    align-items: center
+    ;
+}
+
+.main1{
+    background-color: aliceblue;
+    padding: 2vw;
+    width: 50vw;
+    min-height: 25vw;
+    border-radius: 1vw;
+    grid-area: main1;
+}
+
+.wither{
+    grid-area: wither;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+#xwitherb{
+    position: absolute;
+    top: -1vw;
+    left: 86%;
+    background-image: url(imgs/download.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 50%;
+    border-radius: 1vw;
+    width: 2vw;
+    height: 2vw;
+    z-index: 5;
+    cursor: pointer;
+}
+
+
+#wither1{
+    background-image: url("imgs/wither1.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border-radius: 2vw;
+    width: 20vw;
+    height: 27vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transition: 0.3s;
+    box-shadow: 0px 0px 50px black;
+}
+#wither1:hover{
+    transform:scale(1.02);
+
+}
+.w_logo{
+    width: 11vw;
+    margin-top: 4vw;
+}
+.updown img{
+    width: 10vw;
+    animation: wither 3s ease-in-out infinite alternate;
+}
+#wither1 p{
+    font-size: 1.2vw;
+    font-weight: bold;
+    font-family: 'Karla', sans-serif;
+    color: #B19DD0;
+    width: 70%;
+    margin-top: 2vw;
+    text-indent: 1vw;
+    margin-left: 2vw;
+    margin-bottom: 1vw;
+}
+
+
+@keyframes wither {
+    0%{
+        transform: translatey(1vw) rotate(45deg)
+    }
+    33%{
+        transform: translatey(1vw) rotate(-45deg)
+    }
+    66%{
+        transform: translatey(-1vw) rotate(45deg)
+    }
+    100%{
+        transform: translatey(-1vw) rotate(-45deg)
+    }
+}
+
+
+#dt{
+    grid-area: dt;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.dt1{
+    background-image: url("imgs/dreamtrailsbackground.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border-radius: 2vw;
+    width: 20vw;
+    height: 27vw;
+    box-shadow: 0px 0px 50px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#logo_dt{
+    margin-left: 0.4vw;
+    width: 13vw;
+    margin-top: 2vw;
+}
+.dt1 p{
+    color: #F9BF4B;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1vw;
+}
+#mont{
+    width: 11vw;
+    margin-top: 2.5vw;
+}
+#xdt{
+    position: absolute;
+    top: -1vw;
+    left: 86%;
+    background-image: url(imgs/download.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 50%;
+    border-radius: 1vw;
+    width: 2vw;
+    height: 2vw;
+    z-index: 5;
+    cursor: pointer;
+}
+
+footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5vw;
+    grid-area: f;
+    background-color: black;
+    box-shadow: 0px 0px 50px black;
+    border-top: solid 0.15vw #666666;
+    color: white;
+}
