@@ -15,7 +15,7 @@ function qttTimes(){
             for(var i=0;i<times;i++){
                 final+="<p>Time "+(i+1)+"</p><input type='text' id='name-"+i+"'>";
             }
-            final+="<br><input type='button' id='submit-all' value='Gerar Jogos' OnClick='games()'>";
+            final+="<br><input type='button' id='submit-all' value='Gerar Jogos' OnClick='games()'><button id='back1' OnClick='back1()'>Voltar</button>";
             div2.innerHTML = final;
         }
     }
@@ -36,7 +36,6 @@ function games(){
         times[i] = time;
     }
     //gerando as partidas
-    //const matches = (teams*(teams-1))/2;
     var countm = 0;
     for(var i=0;i<=times.length-2;i++){
         for(var c=i+1;c<=times.length-1;c++){
@@ -61,7 +60,7 @@ function games(){
         for(var i=0;i<ArrMatch.length;i++){
             final+="<input type='number' id='match-"+i+"-team1' value='"+ArrMatch[i].team1goals+"'> "+ArrMatch[i].team1.name+" X "+ArrMatch[i].team2.name+" <input type='number' id='match-"+i+"-team2' value='"+ArrMatch[i].team1goals+"'><br>";
         }
-        final+="<p id='error2'></p><br><input type='button' id='submit-match' value='Chama a Tabelinha' OnClick='table()'>";
+        final+="<p id='error2'></p><br><input type='button' id='submit-match' value='Chama a Tabelinha' OnClick='table()'><button id='back2' OnClick='back2()'>Voltar</button>";
         div3.innerHTML = final;
     }
 }
@@ -122,9 +121,30 @@ function table(){
             for(var i=0;i<times.length;i++){
                 final+="<tr><td>"+times[i].name+"</td><td>"+times[i].points+"</td><td>"+times[i].matches+"</td><td>"+times[i].win+"</td><td>"+times[i].draw+"</td><td>"+times[i].defeat+"</td><td>"+times[i].goalsm+"</td><td>"+times[i].goalss+"</td><td>"+(times[i].goalsm-times[i].goalss)+"</td></tr>";
             }
-            final+="";
+            final+="<button id='back3' OnClick='back3()'>Voltar</button>";
             div4.innerHTML = final;
         }
+    }
+}
+function back1(){
+    const div1 = document.getElementById("div-2").style.display;
+    if(div1 != 'none'){
+        document.getElementById("div-2").style.display = 'none';
+        document.getElementById("div-1").style.display = 'block';
+    }
+}
+function back2(){
+    const div1 = document.getElementById("div-3").style.display;
+    if(div1 != 'none'){
+        document.getElementById("div-3").style.display = 'none';
+        document.getElementById("div-2").style.display = 'block';
+    }
+}
+function back3(){
+    const div1 = document.getElementById("div-4").style.display;
+    if(div1 != 'none'){
+        document.getElementById("div-4").style.display = 'none';
+        document.getElementById("div-3").style.display = 'block';
     }
 }
 function xwither(){
@@ -135,6 +155,7 @@ function xdt(){
     document.getElementById("dt").style.display='none'
     document.getElementById("xdt").style.display = 'none';
 }
+
 
 
 
