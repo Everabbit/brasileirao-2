@@ -9,13 +9,19 @@ function qttTimes(){
         error.innerHTML = "";
         if(div1 != 'none'){
             document.getElementById("div-1").style.display = 'none';
-            document.getElementById("div-2").style.display = 'block';
+            document.getElementById("div-2").style.display = 'flex';
             const div2 = document.getElementById("div-2");
-            var final = "<p>Defina os nomes dos times:</p>";
+            var final = "<h4>Defina os nomes dos times:</h4>";
+            final+="<div class='times'> <div class='times1'>";
+            var xd=1
             for(var i=0;i<times;i++){
-                final+="<p>Time "+(i+1)+"</p><input type='text' id='name-"+i+"'>";
+                final+="<p>Time "+(i+1)+":"+"</p><input type='text' id='name-"+i+"'>";
+                if(i==4 || i==9 || i==14){
+                    xd+=1
+                    final+="</div> <div class='times"+(xd)+"'>";
+                }
             }
-            final+="<br><input type='button' id='submit-all' value='Gerar Jogos' OnClick='games()'><button id='back1' OnClick='back1()'>Voltar</button>";
+            final+=" </div> </div> <div class='botoes'><br><input type='button' id='submit-all' value='Gerar Partidas' OnClick='games()'><button id='back1' OnClick='back1()'>Voltar</button> </div>";
             div2.innerHTML = final;
         }
     }
@@ -80,7 +86,7 @@ function table(){
         error.innerHTML = "Digite um valor válido nos campos!";
     }else{
         for(var i=0;i<ArrMatch.length;i++){
-	    var goals1 = Number(document.getElementById("match-"+i+"-team1").value);
+        var goals1 = Number(document.getElementById("match-"+i+"-team1").value);
             var goals2 = Number(document.getElementById("match-"+i+"-team2").value);
             times[ArrMatch[i].team1.id].goalsm += goals1;
             times[ArrMatch[i].team1.id].goalss += goals2;
@@ -105,10 +111,10 @@ function table(){
         }
         times.sort(function(a,b){
             var r = b.points - a.points;
-	    if(b.points - a.points==0){
-		r = (b.goalsm-b.goalss)-(a.goalsm-a.goalss);
-	    }
-	    return r;
+        if(b.points - a.points==0){
+        r = (b.goalsm-b.goalss)-(a.goalsm-a.goalss);
+        }
+        return r;
         });
         const div3 = document.getElementById("div-3").style.display;
         if(div3 != 'none'){
