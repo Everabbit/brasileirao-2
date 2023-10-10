@@ -12,16 +12,15 @@ function qttTimes(){
             document.getElementById("div-2").style.display = 'flex';
             const div2 = document.getElementById("div-2");
             var final = "<h4>Defina os nomes dos times:</h4>";
-            final+="<div class='times'> <div class='times1'>";
-            var xd=1
+            final+="<div class='times'> <div class='times-escrito'>";
             for(var i=0;i<times;i++){
-                final+="<p>Time "+(i+1)+":"+"</p><input type='text' id='name-"+i+"'>";
-                if(i==4 || i==9 || i==14){
-                    xd+=1
-                    final+="</div> <div class='times"+(xd)+"'>";
+                final+="<div class='times-names'><p>Time "+(i+1)+":"+"</p><input type='text' id='name-"+i+"'></div>";
+                if(i==3 || i==7 || i==11 || i==15
+                    ){
+                    final+="</div> <div class='times-escrito'>";
                 }
             }
-            final+=" </div> </div> <div class='botoes'><br><input type='button' id='submit-all' value='Gerar Partidas' OnClick='games()'><button id='back1' OnClick='back1()'>Voltar</button> </div>";
+            final+=" </div> </div> <div class='botoes'><br><input type='button' id='submit-all' value='Gerar Partidas' OnClick='games()'><button id='back1' OnClick='back1()'>Voltar</button> <button id='sort' OnClick='sortTimes()'>Aleatorizar Times</button></div>";
             div2.innerHTML = final;
         }
     }
@@ -64,10 +63,19 @@ function games(){
         const div3 = document.getElementById("div-3");
         var final = "<p>As Partidas serão essas:</p>";
         for(var i=0;i<ArrMatch.length;i++){
-            final+="<input type='number' id='match-"+i+"-team1' value='"+ArrMatch[i].team1goals+"'> "+ArrMatch[i].team1.name+" X "+ArrMatch[i].team2.name+" <input type='number' id='match-"+i+"-team2' value='"+ArrMatch[i].team1goals+"'><br>";
+            final+="<div class='match'><div class='timec1> <input type='number' id='match-"+i+"-team1' value='"+ArrMatch[i].team1goals+"'> <p>"+ArrMatch[i].team1.name+"</p></div>"+" X "+"<div class='teamc2'>"+ArrMatch[i].team2.name+" <input type='number' id='match-"+i+"-team2' value='"+ArrMatch[i].team1goals+"'> </div>  <input type='checkbox' id='checkmatch-"+i+"'></div class='match'><br>";
         }
         final+="<p id='error2'></p><br><input type='button' id='submit-match' value='Chama a Tabelinha' OnClick='table()'><button id='back2' OnClick='back2()'>Voltar</button>";
         div3.innerHTML = final;
+    }
+}
+
+function sortTimes(){
+    var tempTimes = sortTeams;
+    for(var i=0;i<teams;i++){
+        var random = Math.floor(Math.random()*sortTeams.length);
+        document.getElementById("name-"+i).value = tempTimes[random];
+        tempTimes.splice(random,1);
     }
 }
 
@@ -86,27 +94,30 @@ function table(){
         error.innerHTML = "Digite um valor válido nos campos!";
     }else{
         for(var i=0;i<ArrMatch.length;i++){
-        var goals1 = Number(document.getElementById("match-"+i+"-team1").value);
-            var goals2 = Number(document.getElementById("match-"+i+"-team2").value);
-            times[ArrMatch[i].team1.id].goalsm += goals1;
-            times[ArrMatch[i].team1.id].goalss += goals2;
-            times[ArrMatch[i].team2.id].goalsm += goals2;
-            times[ArrMatch[i].team2.id].goalss += goals1;
-            times[ArrMatch[i].team1.id].matches++;;
-            times[ArrMatch[i].team2.id].matches++;
-            if(goals1>goals2){
-                times[ArrMatch[i].team1.id].win++;
-                times[ArrMatch[i].team1.id].points+=3;
-                times[ArrMatch[i].team2.id].defeat++;
-            }else if(goals2>goals1){
-                times[ArrMatch[i].team2.id].win++;
-                times[ArrMatch[i].team2.id].points+=3;
-                times[ArrMatch[i].team1.id].defeat++;
-            }else{
-                times[ArrMatch[i].team1.id].draw++;
-                times[ArrMatch[i].team1.id].points+=1;
-                times[ArrMatch[i].team2.id].draw++;
-                times[ArrMatch[i].team2.id].points+=1;
+            var checkmatch = document.getElementById("checkmatch-"+i);
+            if(checkmatch.checked){
+                var goals1 = Number(document.getElementById("match-"+i+"-team1").value);
+                var goals2 = Number(document.getElementById("match-"+i+"-team2").value);
+                times[ArrMatch[i].team1.id].goalsm += goals1;
+                times[ArrMatch[i].team1.id].goalss += goals2;
+                times[ArrMatch[i].team2.id].goalsm += goals2;
+                times[ArrMatch[i].team2.id].goalss += goals1;
+                times[ArrMatch[i].team1.id].matches++;;
+                times[ArrMatch[i].team2.id].matches++;
+                if(goals1>goals2){
+                    times[ArrMatch[i].team1.id].win++;
+                    times[ArrMatch[i].team1.id].points+=3;
+                    times[ArrMatch[i].team2.id].defeat++;
+                }else if(goals2>goals1){
+                    times[ArrMatch[i].team2.id].win++;
+                    times[ArrMatch[i].team2.id].points+=3;
+                    times[ArrMatch[i].team1.id].defeat++;
+                }else{
+                    times[ArrMatch[i].team1.id].draw++;
+                    times[ArrMatch[i].team1.id].points+=1;
+                    times[ArrMatch[i].team2.id].draw++;
+                    times[ArrMatch[i].team2.id].points+=1;
+                }
             }
         }
         times.sort(function(a,b){
@@ -136,14 +147,14 @@ function back1(){
     const div1 = document.getElementById("div-2").style.display;
     if(div1 != 'none'){
         document.getElementById("div-2").style.display = 'none';
-        document.getElementById("div-1").style.display = 'block';
+        document.getElementById("div-1").style.display = 'flex';
     }
 }
 function back2(){
     const div1 = document.getElementById("div-3").style.display;
     if(div1 != 'none'){
         document.getElementById("div-3").style.display = 'none';
-        document.getElementById("div-2").style.display = 'block';
+        document.getElementById("div-2").style.display = 'flex';
     }
 }
 function back3(){
@@ -163,7 +174,7 @@ function xdt(){
 }
 
 
-
+var sortTeams = ["Grêmio","Botafofo","Botafogo","Flamengo","Palmeiras"];
 
 var times = [];
 var ArrMatch = [];
