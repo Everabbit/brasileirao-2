@@ -209,11 +209,34 @@ button{
     justify-content:center;
 }
 
-
-
-
-
-
+/*div-3*/
+#div-3{
+    width: 40vw;
+    flex-direction: column;
+}
+.match{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.div-3_text{
+    margin-bottom: 3vw;
+}
+.time1{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.time2{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.botoes3{
+    display: flex;
+    justify-content: center;
+}
 
 
 .wither{

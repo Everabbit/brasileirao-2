@@ -57,15 +57,16 @@ function games(){
     const div2 = document.getElementById("div-2").style.display;
     if(div2 != 'none'){
         document.getElementById("div-2").style.display = 'none';
-        document.getElementById("div-3").style.display = 'block';
+        document.getElementById("div-3").style.display = 'flex';
         
         //mostrando as partidas
         const div3 = document.getElementById("div-3");
-        var final = "<p>As Partidas serão essas:</p>";
+        var final = "<p class='div-3_text'>As Partidas serão essas:</p>";
+        final+= "<div class='matches'>"
         for(var i=0;i<ArrMatch.length;i++){
-            final+="<div class='match'><div class='timec1> <input type='number' id='match-"+i+"-team1' value='"+ArrMatch[i].team1goals+"'> <p>"+ArrMatch[i].team1.name+"</p></div>"+" X "+"<div class='teamc2'>"+ArrMatch[i].team2.name+" <input type='number' id='match-"+i+"-team2' value='"+ArrMatch[i].team1goals+"'> </div>  <input type='checkbox' id='checkmatch-"+i+"'></div class='match'><br>";
+            final+="<div class='match'> <div class='time1'> <input type='number' id='match-"+i+"-team1' value='"+ArrMatch[i].team1goals+"'> <p>"+ArrMatch[i].team1.name+"</p> </div>"+" X "+"<div class='time2'> <input type='number' id='match-"+i+"-team2' value='"+ArrMatch[i].team1goals+"'> "+"<p>"+ArrMatch[i].team2.name+"</p>"+" </div>  <input type='checkbox' id='checkmatch-"+i+"'></div class='match'><br>";
         }
-        final+="<p id='error2'></p><br><input type='button' id='submit-match' value='Chama a Tabelinha' OnClick='table()'><button id='back2' OnClick='back2()'>Voltar</button>";
+        final+=" </div><p id='error2'></p><div class='botoes3'><br><input type='button' id='submit-match' value='Chama a Tabelinha' OnClick='table()'><button id='back2' OnClick='back2()'>Voltar</button> </div>";
         div3.innerHTML = final;
     }
 }
@@ -155,6 +156,11 @@ function back2(){
     if(div1 != 'none'){
         document.getElementById("div-3").style.display = 'none';
         document.getElementById("div-2").style.display = 'flex';
+        c=ArrMatch.length
+        for(var i=0;i<c;i++){
+            ArrMatch.pop();
+            times.pop();
+        }
     }
 }
 function back3(){
