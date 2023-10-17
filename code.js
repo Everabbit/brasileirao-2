@@ -65,7 +65,7 @@ function games(){
         var final = "<p class='div-3_text'>As Partidas serão essas:</p>";
         final+= "<div class='matches'>"
         for(var i=0;i<ArrMatch.length;i++){
-            final+="<div class='match'> <div class='time1'> <input type='number' class='placar' id='match-"+i+"-team1' value='"+ArrMatch[i].team1goals+"'> <p>"+ArrMatch[i].team1.name+"</p> </div>"+"<div class='x'> X <input type='checkbox' id='checkmatch-"+i+"'> </div>"+"<div class='time2'> <input type='number' class='placar' id='match-"+i+"-team2' value='"+ArrMatch[i].team1goals+"'> "+"<p>"+ArrMatch[i].team2.name+"</p>"+" </div> </div class='match'><br>";
+            final+="<div class='match'> <div class='time1'> <input type='number' class='placar' id='match-"+i+"-team1' value='"+ArrMatch[i].team1goals+"'> <p id='team-name1-"+i+"'>"+ArrMatch[i].team1.name+"</p> </div>"+"<div class='x'> X <input type='checkbox' id='checkmatch-"+i+"'> </div>"+"<div class='time2'> <input type='number' class='placar' id='match-"+i+"-team2' value='"+ArrMatch[i].team1goals+"'> "+"<p id='team-name2-"+i+"'>"+ArrMatch[i].team2.name+"</p>"+" </div> </div class='match'><br>";
         }
         final+=" </div><p id='error2'></p><div class='botoes3'><br><input type='button' id='submit-match' value='Chama a Tabelinha' OnClick='table()'><button id='save' OnClick='save()'>Salvar Jogos</button><button id='Load' OnClick='load()'>Carregar Jogos</button><button id='back2' OnClick='back2()'>Voltar</button> </div>";
         div3.innerHTML = final;
@@ -87,10 +87,14 @@ function sortTimes(){
 function save(){
     var error = document.getElementById("error2");
     var exit = false;
+    var savearr = [];
     for(var i=0;i<ArrMatch.length;i++){
-        ArrMatch[i].team1goals = Number(document.getElementById("match-"+i+"-team1").value);
-        ArrMatch[i].team2goals = Number(document.getElementById("match-"+i+"-team2").value);
-        if(ArrMatch[i].team1goals<0 || ArrMatch[i].team2goals<0 || ArrMatch[i].team1goals==NaN || ArrMatch[i].team2goals==NaN){
+        savearr[i]=[];
+        savearr[i][0] = ArrMatch[i].team1.name;
+        savearr[i][2] = ArrMatch[i].team2.name;
+        savearr[i][1] = Number(document.getElementById("match-"+i+"-team1").value);
+        savearr[i][3] = Number(document.getElementById("match-"+i+"-team2").value);
+        if(savearr[i][1]<0 || savearr[i][3]<0 || savearr[i][1]==NaN || savearr[i][3]==NaN){
             exit=true;
             break;
         }
@@ -101,20 +105,73 @@ function save(){
         for(var i=0;i<ArrMatch.length;i++){
             var checkmatch = document.getElementById("checkmatch-"+i);
             if(checkmatch.checked){
-                ArrMatch[i].check = true;
+                savearr[i][4] = true;
             }else{
-                ArrMatch[i].check = false;
+                savearr[i][4] = false;
             }
+            localStorage.setItem("qtt", i+1);
         }
     }
-    localStorage.setItem("matchs", ArrMatch);
+    localStorage.setItem("matchs", savearr);
 }
 
 function load(){
-    ArrMatch = localStorage.getItem("matchs");
-    for(var i=0;i<ArrMatch.length;i++){
-        document.getElementById("match-"+i+"-team1").value = ArrMatch[i].team1goals;
-        document.getElementById("match-"+i+"-team2").value = ArrMatch[i].team2goals;
+    var qttmatch = Number(localStorage.getItem("qtt"));
+    var loadstr = localStorage.getItem("matchs");
+    var loadarr = [];
+    const div1 = document.getElementById("div-1").style.display;
+    if(div1 != 'none'){
+        document.getElementById("div-1").style.display = 'none';
+        document.getElementById("div-3").style.display = 'flex';
+
+        //selecionar times
+        document.getElementById("div-2").style.display = 'none';
+        const div2 = document.getElementById("div-2");
+        var final = "<h4>Defina os nomes dos times:</h4>";
+        final+="<div class='times'> <div class='times-escrito'>";
+        for(var i=0;i<times;i++){
+            final+="<div class='times-names'><p>Time "+(i+1)+":"+"</p><input type='text' id='name-"+i+"'></div>";
+            if(i==3 || i==7 || i==11 || i==15
+                ){
+                final+="</div> <div class='times-escrito'>";
+            }
+        }
+        final+=" </div> </div> <div class='botoes'><br><input type='button' id='submit-all' value='Gerar Partidas' OnClick='games()'><button id='back1' OnClick='back1()'>Voltar</button> <button id='sort' OnClick='sortTimes()'>Aleatorizar Times</button></div>";
+        div2.innerHTML = final;
+        
+        //mostrando as partidas
+        const div3 = document.getElementById("div-3");
+        var final = "<p class='div-3_text'>As Partidas serão essas:</p>";
+        final+= "<div class='matches'>"
+        for(var i=0;i<qttmatch;i++){
+            final+="<div class='match'> <div class='time1'> <input type='number' class='placar' id='match-"+i+"-team1' value=''> <p id='team-name1-"+i+"'></p> </div>"+"<div class='x'> X <input type='checkbox' id='checkmatch-"+i+"'> </div><div class='time2'> <input type='number' class='placar' id='match-"+i+"-team2' value=''> "+"<p id='team-name2-"+i+"'></p> </div> </div class='match'><br>";
+        }
+        final+=" </div><p id='error2'></p><div class='botoes3'><br><input type='button' id='submit-match' value='Chama a Tabelinha' OnClick='table()'><button id='save' OnClick='save()'>Salvar Jogos</button><button id='Load' OnClick='load()'>Carregar Jogos</button><button id='back2' OnClick='back2()'>Voltar</button> </div>";
+        div3.innerHTML = final;
+    }
+    for(var i=0;i<qttmatch;i++){
+        loadarr[i] = [];
+        loadarr[i][0] = loadstr.substring(0,loadstr.indexOf(","));
+        loadstr = loadstr.substring(loadstr.indexOf(",")+1);
+        loadarr[i][1] = Number(loadstr.substring(0,loadstr.indexOf(",")));
+        loadstr = loadstr.substring(loadstr.indexOf(",")+1);
+        loadarr[i][2] = loadstr.substring(0,loadstr.indexOf(","));
+        loadstr = loadstr.substring(loadstr.indexOf(",")+1);
+        loadarr[i][3] = Number(loadstr.substring(0,loadstr.indexOf(",")));
+        loadstr = loadstr.substring(loadstr.indexOf(",")+1);
+        if(loadstr.substring(0,loadstr.indexOf(","))=="true"){
+            loadarr[i][4] = true;
+        }else{
+            loadarr[i][4] = false;
+        }
+        loadstr = loadstr.substring(loadstr.indexOf(",")+1);
+    }
+    for(var i=0;i<loadarr.length;i++){
+        document.getElementById("team-name1-"+i).innerHTML = loadarr[i][0];
+        document.getElementById("match-"+i+"-team1").value = loadarr[i][1];
+        document.getElementById("team-name2-"+i).innerHTML = loadarr[i][2];
+        document.getElementById("match-"+i+"-team2").value = loadarr[i][3];
+        document.getElementById("checkmatch-"+i).checked = loadarr[i][4];
     }
 }
 
