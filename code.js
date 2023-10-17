@@ -49,6 +49,7 @@ function games(){
             match.team2 = times[c];
             match.team1goals = 0;
             match.team2goals = 0;
+            match.check = false;
             ArrMatch[countm] = match;
             countm++;
         }
@@ -64,24 +65,61 @@ function games(){
         var final = "<p class='div-3_text'>As Partidas serão essas:</p>";
         final+= "<div class='matches'>"
         for(var i=0;i<ArrMatch.length;i++){
-            final+="<div class='match'> <div class='time1'> <input type='number' id='match-"+i+"-team1' value='"+ArrMatch[i].team1goals+"'> <p>"+ArrMatch[i].team1.name+"</p> </div>"+" X "+"<div class='time2'> <input type='number' id='match-"+i+"-team2' value='"+ArrMatch[i].team1goals+"'> "+"<p>"+ArrMatch[i].team2.name+"</p>"+" </div>  <input type='checkbox' id='checkmatch-"+i+"'></div class='match'><br>";
+            final+="<div class='match'> <div class='time1'> <input type='number' class='placar' id='match-"+i+"-team1' value='"+ArrMatch[i].team1goals+"'> <p>"+ArrMatch[i].team1.name+"</p> </div>"+"<div class='x'> X <input type='checkbox' id='checkmatch-"+i+"'> </div>"+"<div class='time2'> <input type='number' class='placar' id='match-"+i+"-team2' value='"+ArrMatch[i].team1goals+"'> "+"<p>"+ArrMatch[i].team2.name+"</p>"+" </div> </div class='match'><br>";
         }
-        final+=" </div><p id='error2'></p><div class='botoes3'><br><input type='button' id='submit-match' value='Chama a Tabelinha' OnClick='table()'><button id='back2' OnClick='back2()'>Voltar</button> </div>";
+        final+=" </div><p id='error2'></p><div class='botoes3'><br><input type='button' id='submit-match' value='Chama a Tabelinha' OnClick='table()'><button id='save' OnClick='save()'>Salvar Jogos</button><button id='Load' OnClick='load()'>Carregar Jogos</button><button id='back2' OnClick='back2()'>Voltar</button> </div>";
         div3.innerHTML = final;
     }
 }
 
 function sortTimes(){
-    var tempTimes = sortTeams;
+    var tempTimes = [];
+    for(var i=0;i<sortTeams.length;i++){
+        tempTimes[i]=sortTeams[i];
+    }
     for(var i=0;i<teams;i++){
-        var random = Math.floor(Math.random()*sortTeams.length);
+        var random = Math.floor(Math.random()*tempTimes.length);
         document.getElementById("name-"+i).value = tempTimes[random];
         tempTimes.splice(random,1);
     }
 }
 
+function save(){
+    var error = document.getElementById("error2");
+    var exit = false;
+    for(var i=0;i<ArrMatch.length;i++){
+        ArrMatch[i].team1goals = Number(document.getElementById("match-"+i+"-team1").value);
+        ArrMatch[i].team2goals = Number(document.getElementById("match-"+i+"-team2").value);
+        if(ArrMatch[i].team1goals<0 || ArrMatch[i].team2goals<0 || ArrMatch[i].team1goals==NaN || ArrMatch[i].team2goals==NaN){
+            exit=true;
+            break;
+        }
+    }
+    if(exit==true){
+        error.innerHTML = "Digite um valor válido nos campos!";
+    }else{
+        for(var i=0;i<ArrMatch.length;i++){
+            var checkmatch = document.getElementById("checkmatch-"+i);
+            if(checkmatch.checked){
+                ArrMatch[i].check = true;
+            }else{
+                ArrMatch[i].check = false;
+            }
+        }
+    }
+    localStorage.setItem("matchs", ArrMatch);
+}
+
+function load(){
+    ArrMatch = localStorage.getItem("matchs");
+    for(var i=0;i<ArrMatch.length;i++){
+        document.getElementById("match-"+i+"-team1").value = ArrMatch[i].team1goals;
+        document.getElementById("match-"+i+"-team2").value = ArrMatch[i].team2goals;
+    }
+}
+
 function table(){
-    const error = document.getElementById("error2");
+    var error = document.getElementById("error2");
     var exit = false;
     for(var i=0;i<ArrMatch.length;i++){
         var goals1 = Number(document.getElementById("match-"+i+"-team1").value);
@@ -141,7 +179,6 @@ function table(){
             }
             final+="</table> <button id='back3' OnClick='back3()'>Voltar</button>";
             div4.innerHTML = final;
-            console.log(final);
         }
     }
 }
@@ -181,7 +218,7 @@ function xdt(){
 }
 
 
-var sortTeams = ["Grêmio","Botafofo","Botafogo","Flamengo","Palmeiras"];
+var sortTeams = ["Grêmio","Botafofo","Botafogo","Flamengo","Palmeiras", "América-MG", "Athletico", "Atlético-MG", "Bahia", "Bragantino", "Corinthians", "Coritiba", "Cruzeiro", "Cuiabá", "Fluminense", "Fortaleza", "Goiás",  "Internacional", "Santos", "São Paulo", "Vasco", "Matrix FC", "Críciuma", "Paysandu", "Real Madrid?"];
 
 var times = [];
 var ArrMatch = [];
