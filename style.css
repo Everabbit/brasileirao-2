@@ -9,6 +9,13 @@
 }
 button{
     cursor: pointer;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+}
+input[type="button" i] {
+    cursor: pointer;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
 }
 #submit-match{
     cursor: pointer;
@@ -90,9 +97,26 @@ main{
     text-decoration-line: underline;
 }
 
+.placar{
+    height: 5vw;
+    width: 5vw;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 800;
+}
+.x{
+    display: flex;
+    font-size: 50px;
+    font-weight: 800;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Francois One', sans-serif;
 
-
-
+}
+input[type="checkbox" i] {
+    height: 2vw;
+    width: 2vw;
+}
 
 .div_2{
     display: flex;
@@ -195,7 +219,6 @@ label{
     font-size: 0.7vw;
     text-align: center;
     font-size: 1vw;
-    margin-right: 5vw;
 }
 button{
     border: solid 0.1vw black;
