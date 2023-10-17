@@ -7,6 +7,12 @@
     margin: 0;
     box-sizing: border-box;
 }
+button{
+    cursor: pointer;
+}
+#submit-match{
+    cursor: pointer;
+}
 .container{
     display: grid;
     grid-template-columns: 100%;
@@ -207,6 +213,7 @@ button{
     display: flex;
     width: 100%;
     justify-content:center;
+    gap: 1vw;
 }
 
 /*div-3*/
@@ -237,6 +244,32 @@ button{
     display: flex;
     justify-content: center;
 }
+
+
+/*div-4*/
+#div-4{
+    flex-direction: column;
+    align-items: center;
+    gap: 1vw;
+}
+table{
+    width: 40vw;
+
+    align-items: center;
+    border: solid 0.4vw;
+    font-size: 1vw;
+    border-radius: 1vw;
+}
+th{
+    border-bottom: solid;
+}
+td{
+    text-align: center;
+    border-right: solid;
+    border-bottom: solid;
+}
+
+
 
 
 .wither{

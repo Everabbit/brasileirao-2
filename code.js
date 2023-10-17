@@ -131,7 +131,7 @@ function table(){
         const div3 = document.getElementById("div-3").style.display;
         if(div3 != 'none'){
             document.getElementById("div-3").style.display = 'none';
-            document.getElementById("div-4").style.display = 'block';
+            document.getElementById("div-4").style.display = 'flex';
 
             //sumir com a seleção de partida e mostrar a tabela
             const div4 = document.getElementById("div-4");
@@ -139,8 +139,9 @@ function table(){
             for(var i=0;i<times.length;i++){
                 final+="<tr><td>"+times[i].name+"</td><td>"+times[i].points+"</td><td>"+times[i].matches+"</td><td>"+times[i].win+"</td><td>"+times[i].draw+"</td><td>"+times[i].defeat+"</td><td>"+times[i].goalsm+"</td><td>"+times[i].goalss+"</td><td>"+(times[i].goalsm-times[i].goalss)+"</td></tr>";
             }
-            final+="<button id='back3' OnClick='back3()'>Voltar</button>";
+            final+="</table> <button id='back3' OnClick='back3()'>Voltar</button>";
             div4.innerHTML = final;
+            console.log(final);
         }
     }
 }
@@ -167,7 +168,7 @@ function back3(){
     const div1 = document.getElementById("div-4").style.display;
     if(div1 != 'none'){
         document.getElementById("div-4").style.display = 'none';
-        document.getElementById("div-3").style.display = 'block';
+        document.getElementById("div-3").style.display = 'flex';
     }
 }
 function xwither(){
