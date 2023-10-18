@@ -102,6 +102,7 @@ function save(){
     if(exit==true){
         error.innerHTML = "Digite um valor válido nos campos!";
     }else{
+        error.innerHTML = "As partidas foram salvas com sucesso!";
         for(var i=0;i<ArrMatch.length;i++){
             var checkmatch = document.getElementById("checkmatch-"+i);
             if(checkmatch.checked){
@@ -112,13 +113,22 @@ function save(){
             localStorage.setItem("qtt", i+1);
         }
     }
-    localStorage.setItem("matchs", savearr);
+    var savetimes = JSON.stringify(times);
+    var savematchs = JSON.stringify(ArrMatch);
+    var savefinal = JSON.stringify(savearr);
+    localStorage.setItem("matchs", savefinal);
+    localStorage.setItem("match", savematchs);
+    localStorage.setItem("times", savetimes);
 }
 
 function load(){
     var qttmatch = Number(localStorage.getItem("qtt"));
     var loadstr = localStorage.getItem("matchs");
-    var loadarr = [];
+    var loadarr = JSON.parse(loadstr);
+    loadstr = localStorage.getItem("times");
+    times = JSON.parse(loadstr);
+    loadstr = localStorage.getItem("match");
+    ArrMatch = JSON.parse(loadstr);
     const div1 = document.getElementById("div-1").style.display;
     if(div1 != 'none'){
         document.getElementById("div-1").style.display = 'none';
@@ -129,8 +139,8 @@ function load(){
         const div2 = document.getElementById("div-2");
         var final = "<h4>Defina os nomes dos times:</h4>";
         final+="<div class='times'> <div class='times-escrito'>";
-        for(var i=0;i<times;i++){
-            final+="<div class='times-names'><p>Time "+(i+1)+":"+"</p><input type='text' id='name-"+i+"'></div>";
+        for(var i=0;i<times.length;i++){
+            final+="<div class='times-names'><p>Time "+(i+1)+":"+"</p><input type='text' value='"+times[i].name+"' id='name-"+i+"'></div>";
             if(i==3 || i==7 || i==11 || i==15
                 ){
                 final+="</div> <div class='times-escrito'>";
@@ -148,24 +158,10 @@ function load(){
         }
         final+=" </div><p id='error2'></p><div class='botoes3'><br><input type='button' id='submit-match' value='Chama a Tabelinha' OnClick='table()'><button id='save' OnClick='save()'>Salvar Jogos</button><button id='Load' OnClick='load()'>Carregar Jogos</button><button id='back2' OnClick='back2()'>Voltar</button> </div>";
         div3.innerHTML = final;
+        var error = document.getElementById("error2");
+        error.innerHTML = "As partidas foram carregadas com sucesso!";
     }
-    for(var i=0;i<qttmatch;i++){
-        loadarr[i] = [];
-        loadarr[i][0] = loadstr.substring(0,loadstr.indexOf(","));
-        loadstr = loadstr.substring(loadstr.indexOf(",")+1);
-        loadarr[i][1] = Number(loadstr.substring(0,loadstr.indexOf(",")));
-        loadstr = loadstr.substring(loadstr.indexOf(",")+1);
-        loadarr[i][2] = loadstr.substring(0,loadstr.indexOf(","));
-        loadstr = loadstr.substring(loadstr.indexOf(",")+1);
-        loadarr[i][3] = Number(loadstr.substring(0,loadstr.indexOf(",")));
-        loadstr = loadstr.substring(loadstr.indexOf(",")+1);
-        if(loadstr.substring(0,loadstr.indexOf(","))=="true"){
-            loadarr[i][4] = true;
-        }else{
-            loadarr[i][4] = false;
-        }
-        loadstr = loadstr.substring(loadstr.indexOf(",")+1);
-    }
+
     for(var i=0;i<loadarr.length;i++){
         document.getElementById("team-name1-"+i).innerHTML = loadarr[i][0];
         document.getElementById("match-"+i+"-team1").value = loadarr[i][1];
@@ -189,6 +185,16 @@ function table(){
     if(exit==true){
         error.innerHTML = "Digite um valor válido nos campos!";
     }else{
+        for(var i=0;i<times.length;i++){
+            times[i].points = 0;
+            times[i].matches = 0;
+            times[i].goalsm = 0;
+            times[i].goalss = 0;
+            times[i].win = 0;
+            times[i].defeat = 0;
+            times[i].draw = 0;
+            
+        }
         for(var i=0;i<ArrMatch.length;i++){
             var checkmatch = document.getElementById("checkmatch-"+i);
             if(checkmatch.checked){
@@ -248,6 +254,7 @@ function back1(){
 }
 function back2(){
     const div1 = document.getElementById("div-3").style.display;
+    teams = times.length;
     if(div1 != 'none'){
         document.getElementById("div-3").style.display = 'none';
         document.getElementById("div-2").style.display = 'flex';
