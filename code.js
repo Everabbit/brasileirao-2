@@ -63,11 +63,18 @@ function games(){
         //mostrando as partidas
         const div3 = document.getElementById("div-3");
         var final = "<p class='div-3_text'>As Partidas serão essas:</p>";
-        final+= "<div class='matches'>"
+        final+= "<div class='matches'> <div class='matches_group1'>"
+        a=((ArrMatch.length/2).toString()).indexOf('.')
+
         for(var i=0;i<ArrMatch.length;i++){
             final+="<div class='match'> <div class='time1'> <input type='number' class='placar' id='match-"+i+"-team1' value='"+ArrMatch[i].team1goals+"'> <p id='team-name1-"+i+"'>"+ArrMatch[i].team1.name+"</p> </div>"+"<div class='x'> X <input type='checkbox' id='checkmatch-"+i+"'> </div>"+"<div class='time2'> <input type='number' class='placar' id='match-"+i+"-team2' value='"+ArrMatch[i].team1goals+"'> "+"<p id='team-name2-"+i+"'>"+ArrMatch[i].team2.name+"</p>"+" </div> </div class='match'><br>";
+            
+            if((i+1)%3==0 && i!=0){
+                    final+="</div> <div class='matches_group1'>"
+                    console.log(i)
+            }
         }
-        final+=" </div><p id='error2'></p><div class='botoes3'><br><input type='button' id='submit-match' value='Chama a Tabelinha' OnClick='table()'><button id='save' OnClick='save()'>Salvar Jogos</button><button id='Load' OnClick='load()'>Carregar Jogos</button><button id='back2' OnClick='back2()'>Voltar</button> </div>";
+        final+="</div> </div><p id='error2'></p><div class='botoes3'><br><input type='button' id='submit-match' value='Chama a Tabelinha' OnClick='table()'><button id='save' OnClick='save()'>Salvar Jogos</button><button id='Load' OnClick='load()'>Carregar Jogos</button><button id='back2' OnClick='back2()'>Voltar</button> </div>";
         div3.innerHTML = final;
     }
 }
@@ -236,7 +243,7 @@ function table(){
 
             //sumir com a seleção de partida e mostrar a tabela
             const div4 = document.getElementById("div-4");
-            var final = "<p>100% atualizada, é ruim de aturar:</p><br><table><tr><th>Clube:</th><th>Pontos:</th><th>PJ:</th><th>VIT:</th><th>E:</th><th>DER:</th><th>GM:</th><th>GC:</th><th>SG:</th></tr>";
+            var final = "<p class='text4'>100% atualizada, é ruim de aturar:</p><br><table><tr><th>Clube:</th><th>Pontos:</th><th>PJ:</th><th>VIT:</th><th>E:</th><th>DER:</th><th>GM:</th><th>GC:</th><th>SG:</th></tr>";
             for(var i=0;i<times.length;i++){
                 final+="<tr><td>"+times[i].name+"</td><td>"+times[i].points+"</td><td>"+times[i].matches+"</td><td>"+times[i].win+"</td><td>"+times[i].draw+"</td><td>"+times[i].defeat+"</td><td>"+times[i].goalsm+"</td><td>"+times[i].goalss+"</td><td>"+(times[i].goalsm-times[i].goalss)+"</td></tr>";
             }
