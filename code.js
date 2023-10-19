@@ -64,14 +64,12 @@ function games(){
         const div3 = document.getElementById("div-3");
         var final = "<p class='div-3_text'>As Partidas serão essas:</p>";
         final+= "<div class='matches'> <div class='matches_group1'>"
-        a=((ArrMatch.length/2).toString()).indexOf('.')
 
         for(var i=0;i<ArrMatch.length;i++){
             final+="<div class='match'> <div class='time1'> <input type='number' class='placar' id='match-"+i+"-team1' value='"+ArrMatch[i].team1goals+"'> <p id='team-name1-"+i+"'>"+ArrMatch[i].team1.name+"</p> </div>"+"<div class='x'> X <input type='checkbox' id='checkmatch-"+i+"'> </div>"+"<div class='time2'> <input type='number' class='placar' id='match-"+i+"-team2' value='"+ArrMatch[i].team1goals+"'> "+"<p id='team-name2-"+i+"'>"+ArrMatch[i].team2.name+"</p>"+" </div> </div class='match'><br>";
             
-            if((i+1)%3==0 && i!=0){
+            if((i+1)%3==0){
                     final+="</div> <div class='matches_group1'>"
-                    console.log(i)
             }
         }
         final+="</div> </div><p id='error2'></p><div class='botoes3'><br><input type='button' id='submit-match' value='Chama a Tabelinha' OnClick='table()'><button id='save' OnClick='save()'>Salvar Jogos</button><button id='Load' OnClick='load()'>Carregar Jogos</button><button id='back2' OnClick='back2()'>Voltar</button> </div>";

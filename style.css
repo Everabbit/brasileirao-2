@@ -50,9 +50,7 @@ header{
     margin-left: 0vw;
 }
 
-.mainn{
-    font-family: 'Black Ops One', cursive;
-}
+
 
 main{
     grid-area: m;
@@ -123,6 +121,7 @@ main{
 .main1 h1{
     margin-top: 3vw;
     font-size: 1.7vw;
+    font-family: 'Black Ops One', cursive;
 }
 p {
     font-family: 'Francois One', sans-serif;
@@ -147,6 +146,7 @@ p {
     font-size: 0.7vw;
     text-align: center;
     font-size: 1vw;
+    margin-bottom: 1vw;
 }
 label{
     display: flex;
@@ -157,6 +157,12 @@ label{
 #div-2{
     flex-direction: column;
     align-items: center;
+}
+
+#div-2 h4{
+    font-size: 1vw;
+    font-family: 'Acme', sans-serif;
+    font-weight: lighter;
 }
 .times{
     display: flex;
@@ -494,6 +500,7 @@ footer{
         justify-content: center;
         row-gap: 10vw;
         column-gap: 5vw;
+        margin-bottom: 10vw;
     }
     .main1{
         grid-area: main1;
@@ -510,14 +517,129 @@ footer{
         width: 13vw;
     }
 
+    .main1 h1 {
+        font-size: 4vw;
+    }
+        /*div-1*/
+        .textt{
+            font-size: 2.2vw;
+        }
+        #qtt-times{
+            width: 40vw;
+            height: 5vw;
+            font-size: 2vw;
+        }
+        #submit-qtt{
+            width: 20vw;
+            height: 5vw;
+            font-size: 2vw;
+        }
+        #loadini{
+            width: 20vw;
+            height: 5vw;   
+            font-size: 2vw;
+            margin-bottom: 3vw; 
+        }
+        /*div-2*/
+        #div-2{
+            width: 100%;
+        }
+        #div-2 h4{
+            font-size: 2.3vw;
+            font-family: 'Acme', sans-serif;
+            font-weight: lighter;
+        }
+        .times{
+            gap: 2vw;
+        }
+        .times input{
+            height: 3.6vw;
+            width: 17vw;
+            font-size: 1.8vw;
+        }
+        .times p{
+            font-size: 2vw;
+            font-family: 'Acme', sans-serif;
+        }
+        #submit-all{
+            width: 15vw;
+            height: 3vw;
+            font-size: 2vw;
+        }
+        #back1{
+            width: 13vw;
+            height: 3vw;
+            font-size: 2vw;
+        }
+        #sort{
+            width: 20vw;
+            height: 3vw;
+            font-size: 2vw;
+        }
+        /*div-3*/
+        .div-3_text{
+            font-size: 2vw;
+        }
+        .placar{
+            width: 8vw;
+            height: 8vw;
+            border-radius: 2vw;
+            font-size: 3vw;
+        }
+        .matches{
 
-
-
-
-
-
-
-
+        }
+        .match{
+            border-radius: 1vw;
+            display: flex;
+            justify-content: space-evenly;
+            width: 30vw;
+        }
+        .time1 p{
+            font-size: 1.5vw;
+        }
+        .time2 p{
+            font-size: 1.5vw;
+        }
+        .x{
+            font-size: 3vw;
+        }
+        input[type='checkbox']{
+            height: 3vw;
+            width: 3vw;
+        }
+        #submit-match{
+            width: 19vw;
+            height: 3vw;
+            font-size: 2vw;
+        }
+        #save{
+            width: 15vw;
+            height: 3vw;
+            font-size: 2vw;
+        }
+        #Load{
+            width: 16vw;
+            height: 3vw;
+            font-size: 2vw;
+        }
+        #back2{
+            width: 13vw;
+            height: 3vw;
+            font-size: 2vw;
+        }
+        /*div-4*/
+        .text4{
+            font-size: 2.5vw;
+        }
+        table{
+            font-size: 2.5vw;
+        }
+        #back3{
+            width: 20vw;
+            height: 4vw;
+            font-size: 3vw;
+        }
 
 
 
