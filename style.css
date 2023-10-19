@@ -28,9 +28,7 @@ input[type="button" i] {
                          "m"
                          "f";
 }
-.headd{
-    font-family: 'Acme', sans-serif;
-}
+
 header{
     background-color: #3B403D;
     position: fixed;
@@ -462,6 +460,9 @@ font-size: 0.9vw;
     z-index: 5;
     cursor: pointer;
 }
+.div-1{
+    justify-content: center;
+}
 
 footer{
     display: flex;
@@ -695,7 +696,6 @@ footer{
                     border-radius: 2vw;
                     margin-left: 0.4vw;
                     width: 25vw;
-                    margin-top: vw;
                 }
                 .dt1 p{
                     color: #F9BF4B;
